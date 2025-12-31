@@ -107,10 +107,8 @@ The password for the next level is stored in the only human-readable file in the
 ### Level 5 → Level 6
 
 The password for the next level is stored in a file somewhere under the **inhere** directory and has all of the following properties:
+human-readable, 1033 bytes in size, not executable
 
-- human-readable
-- 1033 bytes in size
-- not executable
 - Writeup
     
     Kita perlu mencari file berdasarkan ukuran (bytes) dan kriteria tertentu. Perintah `find` sangat efisien untuk mencari file dengan ukuran tepat 1033 bytes.
@@ -128,10 +126,8 @@ The password for the next level is stored in a file somewhere under the **inher
 ### Level 6 → Level 7
 
 The password for the next level is stored **somewhere on the server** and has all of the following properties:
+owned by user bandit7, owned by group bandit6, 33 bytes in size
 
-- owned by user bandit7
-- owned by group bandit6
-- 33 bytes in size
 - Writeup
     
     Pencarian dilakukan di seluruh sistem (`/`) berdasarkan user dan group pemilik file. Kita membuang pesan error akses ke `/dev/null`
