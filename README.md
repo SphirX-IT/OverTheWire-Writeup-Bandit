@@ -23,7 +23,7 @@ The goal of this level is for you to log into the game using SSH. The host to wh
     - **`-p`** : Opsi (*flag*) yang digunakan untuk menentukan nomor **port** tertentu.
     - **`ssh`**: Perintah utama untuk melakukan koneksi jarak jauh (*remote*) secara aman ke komputer atau server lain melalui jaringan OpenSSH
 
-## Command Level 1 - 6
+## Command Level 0 - 6
 
 `ls, cd, cat, file, du, find`
 
@@ -47,7 +47,7 @@ The password for the next level is stored in a file called **readme** located 
 
 - Writeup
     
-    Password level 1 ada di file bernama `-`. Di terminal, simbol `-` biasanya digunakan untuk argumen perintah. Untuk membacanya sebagai nama file, kita gunakan path `./`.
+    Password level 2 ada di file bernama `-`. Di terminal, simbol `-` biasanya digunakan untuk argumen perintah. Untuk membacanya sebagai nama file, kita gunakan path `./`.
     
     ```bash
     cat ./-
