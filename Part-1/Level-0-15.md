@@ -15,7 +15,7 @@ The goal of this level is for you to log into the game using SSH. The host to wh
     Gunakan `ssh` untuk masuk ke dalam game.
     
     ```bash
-    ssh [bandit0@bandit.labs.overthewire.org](mailto:bandit0@bandit.labs.overthewire.org) -p 2220
+    ssh bandit0@bandit.labs.overthewire.org -p 2220
     ```
     
     - **`-p`** : Opsi (*flag*) yang digunakan untuk menentukan nomor **port** tertentu.
