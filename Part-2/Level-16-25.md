@@ -79,3 +79,24 @@ The password for the next level is stored in a file **`readme`** in the `homed
     - **`ssh [user]@[host] -p [port] 'cat readme'`**: Memerintahkan SSH untuk menjalankan `cat readme` segera setelah login berhasil dan mengirimkan hasilnya kembali ke layar kita, sehingga perintah `exit` di `.bashrc` tidak sempat memutus sesi kita sebelum data terbaca.
     - **`cat readme`**: Menampilkan isi file yang berisi password.
     - **`/bin/sh`**: Menjalankan shell dasar yang berbeda dari Bash untuk menghindari eksekusi konfigurasi `.bashrc`.
+
+## Level 19 - Level 20
+
+### Level Goal
+
+To gain access to the next level, you should use the `setuid binary` in the `homedirectory`. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (`/etc/bandit_pass`), after you have used the `setuid binary`.
+
+- Writeup
+    
+    Password untuk level berikutnya disimpan di `/etc/bandit_pass/bandit20`. File ini hanya bisa dibaca oleh user `bandit20`. Namun, terdapat sebuah file binary setuid bernama `bandit20-do` di direktori home yang memungkinkan kita menjalankan perintah dengan hak akses pemiliknya (bandit20).
+    
+    ```bash
+    # Melihat daftar file untuk menemukan binary setuid
+    ls -l
+    
+    # Menjalankan perintah cat melalui binary setuid bandit20-do
+    ./bandit20-do cat /etc/bandit_pass/bandit20
+    ```
+    
+    - **`./bandit20-do`**: Mengeksekusi file binary yang memiliki bit **setuid**. Program ini akan menjalankan argumen perintah yang diberikan setelahnya dengan hak akses user `bandit20`.
+    - **`cat /etc/bandit_pass/bandit20`**: Perintah yang dikirimkan sebagai argumen ke `bandit20-do` untuk membaca file password yang sebelumnya tidak bisa kita akses sebagai `bandit19`.
