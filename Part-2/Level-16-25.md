@@ -53,3 +53,29 @@ There are 2 files in the `homedirectory`: **`passwords.old` and `passwords.new`
     
     - **`diff passwords.old passwords.new`**: Membandingkan konten kedua file baris demi baris dan menampilkan perbedaannya. Simbol `>` menunjukkan baris yang ada di file baru namun tidak ada di file lama.
     - **`grep -v -f passwords.old passwords.new`**: Mencari baris di `passwords.new` yang **tidak** ada (`v`) di dalam daftar pola yang diambil dari file `passwords.old` (`f`).
+
+## Level 18 - Level 19
+
+### Level Goal
+
+The password for the next level is stored in a file **`readme`** in the `homedirectory`. Unfortunately, someone has modified `**.bashrc**` to log you out when you log in with SSH.
+
+### Commands you may need to solve this level
+
+`ssh, ls, cat`
+
+- Writeup
+    
+    Kata sandi untuk level berikutnya disimpan dalam file bernama **`readme`** di direktori home. Kendalanya adalah file `.bashrc` telah dimodifikasi untuk memutus koneksi (logout) secara otomatis saat login.
+    
+    ```bash
+    # Mengeksekusi perintah cat secara remote tanpa masuk ke interactive shell
+    ssh bandit18@bandit.labs.overthewire.org -p 2220 'cat readme'
+    
+    # Alternatif: Memaksa penggunaan shell lain untuk bypass .bashrc
+    # ssh bandit18@bandit.labs.overthewire.org -p 2220 /bin/sh
+    ```
+    
+    - **`ssh [user]@[host] -p [port] 'cat readme'`**: Memerintahkan SSH untuk menjalankan `cat readme` segera setelah login berhasil dan mengirimkan hasilnya kembali ke layar kita, sehingga perintah `exit` di `.bashrc` tidak sempat memutus sesi kita sebelum data terbaca.
+    - **`cat readme`**: Menampilkan isi file yang berisi password.
+    - **`/bin/sh`**: Menjalankan shell dasar yang berbeda dari Bash untuk menghindari eksekusi konfigurasi `.bashrc`.
