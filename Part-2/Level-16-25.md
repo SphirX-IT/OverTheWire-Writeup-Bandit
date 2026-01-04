@@ -100,3 +100,36 @@ To gain access to the next level, you should use the `setuid binary` in the `hom
     
     - **`./bandit20-do`**: Mengeksekusi file binary yang memiliki bit **setuid**. Program ini akan menjalankan argumen perintah yang diberikan setelahnya dengan hak akses user `bandit20`.
     - **`cat /etc/bandit_pass/bandit20`**: Perintah yang dikirimkan sebagai argumen ke `bandit20-do` untuk membaca file password yang sebelumnya tidak bisa kita akses sebagai `bandit19`.
+
+## Level 20 - Level 21
+
+### Level Goal
+
+There is a `setuid binary` in the `homedirectory` that does the following: it makes a connection to `localhos`t on the `port` you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).
+
+**NOTE:** Try connecting to your own network daemon to see if it works as you think
+
+### Commands you may need to solve this level
+
+`ssh, nc, cat, bash, screen, tmux, Unix ‘job control’ (bg, fg, jobs, &, CTRL-Z, …)`
+
+- Writeup
+    
+    Level ini mengajarkan konsep **Network Sockets** dan komunikasi antar-proses. Kita harus membuat sebuah *listener* (server mini) yang akan menerima koneksi dari program setuid `./suconnect`. Program tersebut akan mengirimkan password level saat ini, dan jika kita mengirimkan balik password yang sama, ia akan memberikan password level berikutnya.
+    
+    ```bash
+    # Cek file yang ada di direktori home
+    ls -l
+    
+    # Buka port listener di background dan siapkan password level 20 untuk dikirim
+    # Ganti [PASSWORD_LEVEL_20] dengan password asli Anda
+    echo "VxCazJaVykH6Lv6yueYv17Zb02uS2Scf" | nc -l -p 1234 &
+    
+    # Jalankan program suconnect untuk menghubungkan ke port yang baru kita buka
+    ./suconnect 1234
+    ```
+    
+    - **`nc -l -p 1234`**: Menggunakan **Netcat** untuk mendengarkan (*listen*) pada port 1234.
+    - **`&`**: Menjalankan perintah di *background* sehingga kita bisa mengetikkan perintah selanjutnya tanpa harus menutup listener tersebut.
+    - **`./suconnect 1234`**: Menjalankan binary yang akan mencoba melakukan koneksi ke localhost pada port 1234. Program ini akan mengirimkan password bandit20 ke port tersebut dan menunggu balasan yang sama.
+    - **`echo "[pass]" | nc ...`**: Mengirimkan string password secara otomatis segera setelah `./suconnect` melakukan koneksi ke listener kita.
