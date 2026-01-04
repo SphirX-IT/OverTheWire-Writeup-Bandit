@@ -133,3 +133,36 @@ There is a `setuid binary` in the `homedirectory` that does the following: it ma
     - **`&`**: Menjalankan perintah di *background* sehingga kita bisa mengetikkan perintah selanjutnya tanpa harus menutup listener tersebut.
     - **`./suconnect 1234`**: Menjalankan binary yang akan mencoba melakukan koneksi ke localhost pada port 1234. Program ini akan mengirimkan password bandit20 ke port tersebut dan menunggu balasan yang sama.
     - **`echo "[pass]" | nc ...`**: Mengirimkan string password secara otomatis segera setelah `./suconnect` melakukan koneksi ke listener kita.
+
+## Level 21 - Level 22
+
+### Level Goal
+
+A program is running automatically at regular intervals from **`cron`**, the time-based job scheduler. Look in **`/etc/cron.d/`** for the configuration and see what command is being executed.
+
+### Commands you may need to solve this level
+
+`cron, crontab, crontab(5) (use “man 5 crontab” to access this)`
+
+- Writeup
+    
+    Password untuk level berikutnya disimpan di dalam sebuah file di `/etc/bandit_pass/bandit22`, namun hanya bisa dibaca oleh user `bandit22`. Sebuah tugas otomatis (*cron job*) berjalan secara berkala sebagai user `bandit22` untuk menjalankan script yang membocorkan password tersebut ke lokasi tertentu.
+    
+    ```bash
+    # Melihat daftar pekerjaan cron yang tersedia
+    ls /etc/cron.d/
+    
+    # Memeriksa isi konfigurasi cron untuk bandit22
+    cat /etc/cron.d/cronjob_bandit22
+    
+    # Membaca isi script shell yang dijalankan oleh cron tersebut
+    cat /usr/bin/cronjob_bandit22.sh
+    
+    # Membaca file password yang dihasilkan oleh script di direktori /tmp
+    cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+    ```
+    
+    - **`ls /etc/cron.d/`**: Digunakan untuk melihat daftar tugas terjadwal yang didefinisikan secara sistem.
+    - **`cat /etc/cron.d/cronjob_bandit22`**: Perintah ini menunjukkan bahwa ada script yang berjalan setiap menit (`* * * *`) sebagai user `bandit22`.
+    - **`cat /usr/bin/cronjob_bandit22.sh`**: Membedah logika script. Di dalamnya terdapat perintah: `cat /etc/bandit_pass/bandit22 > /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv`. Artinya, password disalin ke file di `/tmp`.
+    - `cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv`: Membaca file hasil salinan tersebut untuk mendapatkan password asli milik bandit22.
