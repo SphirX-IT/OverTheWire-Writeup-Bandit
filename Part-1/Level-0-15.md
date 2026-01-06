@@ -83,7 +83,7 @@ The password for the next level is stored in a file called `--spaces in this fi
     File bernama `--spaces in this filename--` tidak bisa dibaca begitu saja karena terminal akan menganggap spasi sebagai pemisah antar file yang berbeda. Gunakan *backslash* (`\`) sebelum spasi agar terminal tidak menganggapnya sebagai beberapa argumen yang berbeda.
     
     ```bash
-    cat ./"spaces in this filename"
+    cat ./"--spaces in this filename--"
     ```
     
     **`" "`** : Tanda kutip digunakan agar sistem membaca teks di dalamnya sebagai satu string tunggal.
