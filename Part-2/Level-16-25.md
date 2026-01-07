@@ -166,3 +166,44 @@ A program is running automatically at regular intervals from **`cron`**, the ti
     - **`cat /etc/cron.d/cronjob_bandit22`**: Perintah ini menunjukkan bahwa ada script yang berjalan setiap menit (`* * * *`) sebagai user `bandit22`.
     - **`cat /usr/bin/cronjob_bandit22.sh`**: Membedah logika script. Di dalamnya terdapat perintah: `cat /etc/bandit_pass/bandit22 > /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv`. Artinya, password disalin ke file di `/tmp`.
     - `cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv`: Membaca file hasil salinan tersebut untuk mendapatkan password asli milik bandit22.
+
+## Level 22 → Level 23
+
+### Level Goal
+
+A program is running automatically at regular intervals from **`cron`**, the time-based job scheduler. Look in **`/etc/cron.d/`** for the configuration and see what command is being executed.
+
+**NOTE:** Looking at shell scripts written by other people is a very useful skill. The script for this level is intentionally made easy to read. If you are having problems understanding what it does, try executing it to see the debug information it prints.
+
+### Commands you may need to solve this level
+
+`cron, crontab, crontab(5) (use “man 5 crontab” to access this)`
+
+- Writeup
+    
+    Level ini memperkenalkan konsep **Cron jobs**, yaitu sistem penjadwalan tugas otomatis di Linux. Tantangannya adalah kita harus menganalisis sebuah skrip shell yang dijalankan oleh user lain (`bandit23`) untuk mengetahui di mana ia menyimpan password level berikutnya.
+    
+    ```bash
+    # Mencari tugas otomatis yang berjalan di sistem
+    ls /etc/cron.d/
+    
+    # Membaca isi konfigurasi cron job milik bandit23
+    cat /etc/cron.d/cronjob_bandit23
+    
+    # Menganalisis isi skrip yang dijalankan secara otomatis tersebut
+    cat /usr/bin/cronjob_bandit23.sh
+    
+    # SIMULASI LOGIKA: Hitung nama file target jika user-nya adalah 'bandit23'
+    # Kita jalankan perintah ini secara manual untuk menebak nama file rahasianya
+    echo I am user bandit23 | md5sum | cut -d ' ' -f 1
+    # Output: 8ca319486bfbbc3663ea0fbe81326349
+    
+    # Membaca file password yang sudah dibuat oleh sistem (cron) di folder /tmp
+    cat /tmp/8ca319486bfbbc3663ea0fbe81326349
+    ```
+    
+    - **`ls /etc/cron.d/`**: Melihat daftar file tugas terjadwal. Di sini kita menemukan adanya tugas untuk `bandit23`.
+    - **`cat /usr/bin/cronjob_bandit23.sh`**: Membedah logika skrip. Skrip tersebut mengambil nama user (`whoami`), mengubahnya menjadi string hash MD5, lalu menyalin password ke `/tmp/[nama_hash]`.
+    - **`echo I am user bandit23 | md5sum`**: Karena skrip asli menggunakan variabel `$myname`, kita menggantinya secara manual dengan `bandit23` untuk mengetahui "nama file rahasia" yang dihasilkan oleh sistem khusus untuk level berikutnya.
+    - **`cut -d ' ' -f 1`**: Memotong hasil MD5 agar kita hanya mendapatkan string hash-nya saja tanpa karakter tambahan.
+    - **`cat /tmp/8ca3...`**: Mengambil password yang sudah diletakkan di sana oleh tugas otomatis (cron) yang berjalan setiap menit.
