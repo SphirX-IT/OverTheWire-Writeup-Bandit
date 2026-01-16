@@ -292,3 +292,49 @@ You do not need to create new connections each time
     - **`mkdir /tmp/my_brute_force`**: Membuat folder di direktori `/tmp` karena user bandit hanya memiliki izin menulis (write access) di sana, bukan di home directory.
     - **`for i in {0000..9999}`**: Sebuah perulangan (loop) yang secara otomatis menghasilkan angka berurutan dari 0000 sampai 9999 dengan format 4 digit.
     - **`nc localhost 30002`**: Menghubungkan output dari script ke layanan yang berjalan di port 30002. Netcat akan mengirimkan semua kombinasi password+PIN dalam satu sesi koneksi.
+
+## Level 25 → Level 26
+
+### Level Goal
+
+Logging in to `bandit26` from `bandit25` should be fairly easy… The shell for user `bandit26` is not **`/bin/bash`**, but something else. Find out what it is, how it works and how to break out of it.
+
+> NOTE: if you’re a Windows user and typically use Powershell to ssh into bandit: Powershell is known to cause issues with the intended solution to this level. You should use command prompt instead.
+> 
+
+### Commands you may need to solve this level
+
+`ssh, cat, more, vi, ls, id, pwd`
+
+- Writeup
+    
+    
+    Level ini melatih ketangkasan dalam memanipulasi *restricted shell* (shell terbatas). User `bandit26` tidak memiliki shell standar (`/bin/bash`), melainkan skrip yang langsung mengeluarkan user setelah menampilkan teks.
+    
+    ```bash
+    # Di terminal laptop/lokal Anda (bukan di dalam server), 
+    # Perkecil ukuran jendela terminal hingga sangat pendek (gepeng).
+    
+    # Lakukan SSH dari terminal lokal Anda langsung ke bandit26 menggunakan kunci privat.
+    # (Pastikan Anda sudah menyalin isi bandit26.sshkey ke file lokal atau menggunakan command ini)
+    ssh -i bandit26.sshkey bandit26@bandit.labs.overthewire.org -p 2220
+    
+    # Karena jendela kecil, muncul tulisan "--More--". Tekan tombol:
+    v
+    
+    # Di dalam editor VI yang terbuka, ketik perintah berikut:
+    :set shell=/bin/bash
+    
+    # Panggil shell dengan mengetik:
+    :shell
+    
+    # Sekarang Anda adalah bandit26. Baca password Anda sendiri:
+    cat /etc/bandit_pass/bandit26
+    ```
+    
+    - **`ssh -i bandit26.sshkey`**: Login sebagai `bandit26` menggunakan kunci identitas. Kita melakukan ini dari luar karena server memblokir koneksi antar-localhost.
+    - **`more` & Ukuran Terminal**: Skrip login `bandit26` menjalankan `more`. Dengan terminal kecil, `more` berhenti menunggu input agar teks tidak terpotong.
+    - **`v`**: Membuka editor `vi` dari dalam pager `more`. Ini adalah "pintu belakang" untuk keluar dari batasan skrip login.
+    - **`:set shell=/bin/bash`**: Mengubah variabel internal `vi` agar merujuk ke shell Linux yang normal.
+    - **`:shell`**: Membuka sesi shell interaktif di dalam `vi`. Tanpa langkah ini, Anda akan langsung terputus (*disconnected*) saat mencoba keluar dari `vi`.
+    - **`cat /etc/bandit_pass/bandit26`**: Setelah mendapatkan shell yang stabil, Anda memiliki izin untuk membaca password level Anda saat ini.
