@@ -1,4 +1,4 @@
-# 📁 Level 20 ➔ 23: Local Connections & Permissions
+# 📁 Level 20 → 23: Local Connections & Permissions
 
 Pada fase ini, tantangan berfokus pada bagaimana proses saling berinteraksi di dalam sistem Linux, manajemen hak akses (permissions), dan pengenalan pada otomatisasi tugas.
 
