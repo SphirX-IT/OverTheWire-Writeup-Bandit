@@ -1,4 +1,4 @@
-# 📁 Level 00 ➔ 19: Linux Fundamentals
+# 📁 Level 00 → 19: Linux Fundamentals
 
 Bagian ini mencakup dasar-dasar navigasi Linux, manipulasi file, dan enkripsi sederhana.
 
