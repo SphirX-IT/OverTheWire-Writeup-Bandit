@@ -1,13 +1,13 @@
 # 🚩 OverTheWire Bandit Writeups
 
-Repositori ini adalah dokumentasi teknis perjalanan saya dalam menaklukkan tantangan **Bandit** dari OverTheWire. Dokumentasi ini disusun sebagai bagian dari persiapan **LKS (Lomba Kompetensi Siswa) Nasional 2026** bidang **Cyber Security**.
+Repositori ini adalah dokumentasi teknis perjalanan saya dalam menaklukkan tantangan **Bandit** dari OverTheWire. Dokumentasi ini disusun sebagai bagian dari persiapan **LKS (Lomba Kompetensi Siswa)** bidang **Cyber Security**.
 
 ---
 
 ## 👤 Candidate Profile
 - **Institution:** SMKN 1 Pemalang
 - **Focus:** Network Security, Pentesting, and Automation.
-- **Goal:** Preparation for LKS Nasional 2026 & PTN Portfolio.
+- **Goal:** Preparation for LKS & PTN Portfolio.
 
 ---
 
