@@ -1,31 +1,47 @@
-# 🚩 OverTheWire Bandit Writeup - LKS Cyber Security Preparation
+# 🚩 OverTheWire Bandit Writeups
 
-## 🏆 Project Overview
-Repositori ini berisi dokumentasi lengkap penyelesaian tantangan **OverTheWire Bandit**. Proyek ini disusun sebagai bagian dari persiapan intensif untuk menghadapi:
-1. **LKS Cyber Security Tingkat Kabupaten Pemalang**.
-2. **LKS Cyber Security Tingkat Provinsi Jawa Tengah**.
-
-Dokumentasi ini dibuat untuk memperkuat pemahaman mengenai *Linux Command Line Interface* (CLI), manajemen file, kriptografi dasar, dan teknik komunikasi jaringan yang menjadi fondasi penting dalam kompetisi *Cyber Security*.
-
-## 🗂️ Struktur Repositori
-* **`part1/`**: ✅ **Selesai** - Dokumentasi `level-0-15.md`.
-* **`part2/`**: 🚧 **Dalam Proses (Work in Progress)** - Dokumentasi untuk Level 16 hingga Level 25 sedang dikerjakan.
-
-## 🛠️ Aturan Dokumentasi
-Setiap *writeup* dalam repositori ini mengikuti standar profesional:
-* **Format Judul**: Menggunakan hierarki `##` untuk level dan `###` untuk detail.
-* **Inline Code**: Semua istilah teknis seperti nama perintah (`ls`, `grep`), nama file (`data.txt`), dan atribut (`human-readable`) menggunakan format *backticks*.
-* **Bahasa**: Menggunakan Bahasa Indonesia yang profesional dan teknis.
-
-## 🚀 Cara Mempelajari
-Silakan buka folder `part1/` dan pilih file dokumentasi. Setiap level dilengkapi dengan:
-1. **Level Goal**: Target yang harus dicapai pada level tersebut.
-2. **Solution**: Blok kode `bash` yang berisi perintah langsung.
-3. **Penjelasan Perintah**: Analisis mendalam mengenai fungsi dari setiap *tool* yang digunakan.
-
-## 🏁 Target Kompetisi
-- [ ] LKS Cyber Security Kabupaten Pemalang
-- [ ] LKS Cyber Security Provinsi Jawa Tengah
+Repositori ini adalah dokumentasi teknis perjalanan saya dalam menaklukkan tantangan **Bandit** dari OverTheWire. Dokumentasi ini disusun sebagai bagian dari persiapan **LKS (Lomba Kompetensi Siswa) Nasional 2026** bidang **Cyber Security**.
 
 ---
-*Dibuat dengan semangat kompetisi untuk kemajuan talenta digital Indonesia. Salam dari Pemalang!*
+
+## 👤 Candidate Profile
+- **Institution:** SMKN 1 Pemalang
+- **Focus:** Network Security, Pentesting, and Automation.
+- **Goal:** Preparation for LKS Nasional 2026 & PTN Portfolio.
+
+---
+
+## 📊 Progress & Writeups
+
+Daftar tantangan yang telah diselesaikan. Klik pada link untuk melihat penjelasan teknis dan script yang digunakan.
+
+| Level Range | Status | Key Topics | Documentation |
+| :--- | :---: | :--- | :--- |
+| **00 - 09** | ✅ | Linux Fundamentals, Hidden Files | [View Writeup](./Level-00-19/README.md) |
+| **10 - 19** | ✅ | Base64, Rot13, Hexdump, SSH Keys | [View Writeup](./Level-00-19/README.md) |
+| **20 - 29** | 🔄 | Port Forwarding, **Brute Force**, Git | [In Progress](./Level-20-29/) |
+| **30 - 34** | ⏳ | Advanced Linux & Git | TBD |
+
+### 🚀 Featured Solution: Level 24-25 (Brute Force)
+Pada level ini, saya menerapkan kemampuan pemrograman untuk mengotomatisasi tantangan keamanan:
+- **Bash Method:** [bruteforce25.sh](./Level-20-29/Level-24-25/bruteforce25.sh) (Fast execution)
+- **Python Method:** [bruteforce25.py](./Level-20-29/Level-24-25/bruteforce25.py) (Advanced Logic using `zfill`)
+- **Technical Writeup:** [Detailed Explanation](./Level-20-29/Level-24-25/README.md)
+
+---
+
+## 🛠️ Tech Stack & Tools
+- **Operating Systems:** Kali Linux (VM), WSL2 (Ubuntu)
+- **Scripting:** Python 3.x, Bash Scripting
+- **Tools:** `ssh`, `netcat`, `grep`, `find`, `openssl`, `nmap`
+
+---
+
+## 📈 Learning Notes
+Dokumentasi ini mencerminkan kurva belajar saya, mulai dari perintah Linux dasar hingga pembuatan skrip otomasi yang lebih kompleks. Setiap *writeup* mencakup:
+1. **Goal:** Apa yang harus dicapai.
+2. **Commands:** Perintah utama yang digunakan.
+3. **Concept:** Penjelasan teknis di balik solusi tersebut.
+
+---
+*Created with 💻 by SphirX-IT - 2026*
