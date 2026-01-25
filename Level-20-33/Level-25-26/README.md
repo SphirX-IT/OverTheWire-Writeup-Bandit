@@ -1,3 +1,14 @@
+# 📁 Level 25 → 26 & 26 → 27: Shell Escape & Privilege Escalation
+
+Fase ini berfokus pada teknik meloloskan diri dari shell yang dibatasi (Restricted Shell) dan melakukan eskalasi hak akses melalui binary yang memiliki izin khusus (SetUID).
+
+| Level | Materi Utama | Perintah Penting |
+| :--- | :--- | :--- |
+| **25-26** | Restricted Shell Escape | `more`, `vi`, `:set shell`, `:shell` |
+| **26-27** | SetUID Exploitation | `ls -la`, `./bandit27-do`, `id` |
+
+---
+
 ### Level 25 → Level 26
 
 Logging in to bandit26 from bandit25 should be fairly easy… The shell for user `bandit26` is not **`/bin/bash`**, but something else. Find out what it is, how it works and how to break out of it.
