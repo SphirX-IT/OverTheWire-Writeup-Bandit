@@ -108,3 +108,38 @@ From your local machine (not the OverTheWire machine!), clone the repository and
     - **`git branch -a`**: Menampilkan semua cabang yang tersedia. Flag `a` (all) sangat penting karena secara default Git hanya menunjukkan cabang aktif, sementara password berada di cabang *remote* (`remotes/origin/dev`).
     - **`git checkout dev`**: Mengalihkan *working directory* kita ke versi kode yang ada di cabang `dev`. Git akan secara otomatis mengambil data dari `remotes/origin/dev`.
     - **`cat README.md`**: Membaca isi file setelah berada di cabang yang tepat. Di cabang ini, isi filenya berbeda dengan cabang `master`.
+
+---
+
+### Level 30 → Level 31
+
+There is a git repository at `ssh://bandit30-git@bandit.labs.overthewire.org/home/bandit30-git/repo` via the port `2220`. The password for the user `bandit30-git` is the same as for the user `bandit30`.
+
+From your local machine (not the OverTheWire machine!), clone the repository and find the password for the next level. This needs git installed locally on your machine.
+
+- Writeup
+    
+    Pada level ini, kita dihadapkan dengan sebuah repositori Git. Setelah memeriksa riwayat *commit* (`git log`) dan file yang ada, tidak ditemukan kata sandi. Ternyata, informasi penting disembunyikan di dalam fitur **Git Tags**, yang biasanya digunakan untuk menandai poin rilis atau versi penting.
+    
+    ```bash
+    # Membuat direktori kerja sementara
+    mkdir /tmp/my_work_30
+    cd /tmp/my_work_30
+    
+    # Melakukan clone repositori (masukkan password bandit30 saat diminta)
+    git clone ssh://bandit30-git@localhost:2220/home/bandit30-git/repo
+    
+    # Masuk ke direktori repo
+    cd repo
+    
+    # Melihat daftar tag yang ada di repositori
+    git tag
+    
+    # Melihat isi dari tag yang ditemukan
+    git show secret
+    ```
+    
+    - **`mkdir /tmp/...`**: Karena kita tidak memiliki izin menulis di direktori *home*, kita harus membuat folder di `/tmp` untuk menyimpan hasil *clone*.
+    - **`git clone`**: Mengunduh seluruh riwayat dan file proyek dari server Git lokal ke mesin kita.
+    - **`git tag`**: Menampilkan daftar semua label/tag yang telah dibuat di repositori ini. Tag sering kali luput dari pemeriksaan jika kita hanya melihat `git log`.
+    - **`git show [tagname]`**: Perintah ini digunakan untuk mengekstrak detail dari objek Git. Jika tag tersebut adalah *annotated tag*, perintah ini akan menampilkan pesan yang disertakan pembuatnya, yang dalam kasus ini berisi kata sandi.
