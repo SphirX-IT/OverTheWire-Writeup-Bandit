@@ -1,47 +1,45 @@
-# 🚩 OverTheWire Bandit Writeups
+# 🚩 OverTheWire Bandit Writeups — [SphirX-IT]
 
-Repositori ini adalah dokumentasi teknis perjalanan saya dalam menaklukkan tantangan **Bandit** dari OverTheWire. Dokumentasi ini disusun sebagai bagian dari persiapan **LKS (Lomba Kompetensi Siswa)** bidang **Cyber Security**.
+![Linux](https://img.shields.io/badge/OS-Linux-orange?logo=linux)
+![Security](https://img.shields.io/badge/Domain-CyberSecurity-red)
+![Level](https://img.shields.io/badge/Progress-34%20%2F%2034-brightgreen)
 
----
-
-## 👤 Candidate Profile
-- **Institution:** SMKN 1 Pemalang
-- **Focus:** Network Security, Pentesting, and Automation.
-- **Goal:** Preparation for LKS & PTN Portfolio.
+Dokumentasi lengkap penyelesaian tantangan **Bandit** dari [OverTheWire](https://overthewire.org/wargames/bandit/). Repositori ini dirancang untuk menunjukkan pemahaman mendalam tentang administrasi sistem Linux, keamanan jaringan, dan teknik investigasi data.
 
 ---
 
-## 📊 Progress & Writeups
-
-Daftar tantangan yang telah diselesaikan. Klik pada link untuk melihat penjelasan teknis dan script yang digunakan.
-
-| Level Range | Status | Key Topics | Documentation |
-| :--- | :---: | :--- | :--- |
-| **00 - 09** | ✅ | Linux Fundamentals, Hidden Files | [View Writeup](./Level-00-19/README.md) |
-| **10 - 19** | ✅ | Base64, Rot13, Hexdump, SSH Keys | [View Writeup](./Level-00-19/README.md) |
-| **20 - 29** | 🔄 | Port Forwarding, **Brute Force**, Git | [In Progress](./Level-20-29/) |
-| **30 - 34** | ⏳ | Advanced Linux & Git | TBD |
-
-### 🚀 Featured Solution: Level 24-25 (Brute Force)
-Pada level ini, saya menerapkan kemampuan pemrograman untuk mengotomatisasi tantangan keamanan:
-- **Bash Method:** [bruteforce25.sh](./Level-20-29/Level-24-25/bruteforce25.sh) (Fast execution)
-- **Python Method:** [bruteforce25.py](./Level-20-29/Level-24-25/bruteforce25.py) (Advanced Logic using `zfill`)
-- **Technical Writeup:** [Detailed Explanation](./Level-20-29/Level-24-25/README.md)
+## 🎯 Project Objectives
+Tujuan dari pengerjaan tantangan ini adalah untuk menguasai:
+* **Linux CLI Proficiency**: Manipulasi file, pengolahan teks, dan navigasi sistem tingkat lanjut.
+* **Network Security**: Komunikasi aman menggunakan SSH, SSL/TLS, dan analisis port.
+* **Cryptography & Encoding**: Identifikasi data terenkripsi dan pemecahan hashing sederhana.
+* **Git Forensics**: Investigasi metadata, histori komit, dan manajemen branch pada repositori.
 
 ---
 
-## 🛠️ Tech Stack & Tools
-- **Operating Systems:** Kali Linux (VM), WSL2 (Ubuntu)
-- **Scripting:** Python 3.x, Bash Scripting
-- **Tools:** `ssh`, `netcat`, `grep`, `find`, `openssl`, `nmap`
+## 📂 Repository Structure
+
+Setiap folder berisi langkah-langkah teknis, perintah yang digunakan, dan penjelasan konsep di balik setiap level.
+
+| Folder | Level | Deskripsi Materi Utama |
+| :--- | :--- | :--- |
+| [**Level 00-19**](./Level-00-19/) | 0 → 19 | Dasar-dasar navigasi, filter teks (`grep`, `uniq`), dan file permission. |
+| [**Level 20-33**](./Level-20-33/) | 20 → 33 | Automation (Brute-force), Shell Escape, dan Git Forensics. |
 
 ---
 
-## 📈 Learning Notes
-Dokumentasi ini mencerminkan kurva belajar saya, mulai dari perintah Linux dasar hingga pembuatan skrip otomasi yang lebih kompleks. Setiap *writeup* mencakup:
-1. **Goal:** Apa yang harus dicapai.
-2. **Commands:** Perintah utama yang digunakan.
-3. **Concept:** Penjelasan teknis di balik solusi tersebut.
+## 🛠️ Key Tools & Skills
+* **Data Processing**: `grep`, `awk`, `sed`, `sort`, `uniq`, `strings`.
+* **Network & Connect**: `ssh`, `nc`, `openssl`, `nmap`.
+* **Version Control**: `git log`, `git checkout`, `git tag`, `git show`.
+* **Scripting & Automation**: Bash scripting untuk otomatisasi pencarian password.
 
 ---
-*Created with 💻 by SphirX-IT - 2026*
+
+## 🗝️ Top Technical Takeaways
+1. **Everything is a File**: Memahami bahwa di Linux, hampir semua hal (bahkan proses) direpresentasikan sebagai file.
+2. **Metadata is Gold**: Pelajaran penting dari level Git bahwa data yang dihapus seringkali masih tertinggal di dalam metadata atau objek histori.
+3. **Privilege Awareness**: Pentingnya memeriksa izin akses (SetUID) pada binary sistem untuk mencegah eskalasi hak akses.
+
+---
+*Created with ☕ and persistence by [SphirX-IT](https://github.com/SphirX-IT)*
