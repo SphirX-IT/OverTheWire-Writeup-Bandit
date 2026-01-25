@@ -185,3 +185,28 @@ From your local machine (not the OverTheWire machine!), clone the repository and
     - **`git clone ... .`**: Titik di akhir perintah memastikan hasil *clone* langsung diletakkan di folder saat ini tanpa membuat sub-folder baru.
     - **`git add -f`**: Flag `f` (force) sangat krusial di sini. Repositori ini memiliki file `.gitignore` yang memblokir semua file `.txt`. Tanpa `f`, file `key.txt` tidak akan pernah masuk ke area persiapan (staging).
     - **`git push`**: Mengirim perubahan. Pesan error `pre-receive hook declined` di akhir adalah hal normal karena server hanya ingin memvalidasi file Anda, bukan menyimpannya secara permanen.
+
+---
+
+### Level 32 → Level 33
+
+After all this `git` stuff, it’s time for another escape. Good luck!
+
+* Writeup
+    
+    Di level ini, kita dihadapkan pada sebuah **Restricted Shell** yang sangat unik. Setiap perintah yang kita ketikkan secara otomatis diubah menjadi huruf besar (uppercase), sehingga perintah standar Linux seperti `ls` atau `cat` tidak akan berfungsi karena sistem Linux bersifat *case-sensitive*.
+    
+    ```bash
+    # 1Gunakan positional parameter untuk memanggil shell asli
+    $0
+    
+    # Periksa identitas (opsional, untuk memastikan shell sudah normal)
+    whoami
+    
+    # Baca password untuk level berikutnya
+    cat /etc/bandit_pass/bandit33
+    ```
+    
+    - **`$0`**: Ini adalah variabel spesial dalam shell (positional parameter) yang menyimpan nama program atau shell yang sedang dijalankan. Di level ini, memanggil `$0` akan mengeksekusi shell dasar (`sh` atau `bash`) yang berada di balik program pembatas tersebut. Karena `$0` bukan merupakan huruf alfabet, filter "uppercase" tidak merusaknya.
+    - **`whoami`**: Digunakan untuk melihat user saat ini. Setelah menjalankan `$0`, Anda akan melihat bahwa Anda telah beralih dari shell terbatas ke shell fungsional.
+    - **`cat /etc/bandit_pass/bandit33`**: Perintah standar untuk membaca file password bandit33 setelah berhasil keluar dari *restricted shell*.
