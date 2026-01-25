@@ -143,3 +143,45 @@ From your local machine (not the OverTheWire machine!), clone the repository and
     - **`git clone`**: Mengunduh seluruh riwayat dan file proyek dari server Git lokal ke mesin kita.
     - **`git tag`**: Menampilkan daftar semua label/tag yang telah dibuat di repositori ini. Tag sering kali luput dari pemeriksaan jika kita hanya melihat `git log`.
     - **`git show [tagname]`**: Perintah ini digunakan untuk mengekstrak detail dari objek Git. Jika tag tersebut adalah *annotated tag*, perintah ini akan menampilkan pesan yang disertakan pembuatnya, yang dalam kasus ini berisi kata sandi.
+
+---
+
+### Level 31 → Level 32
+
+There is a git repository at `ssh://bandit31-git@bandit.labs.overthewire.org/home/bandit31-git/repo` via the port `2220`. The password for the user `bandit31-git` is the same as for the user `bandit31`.
+
+From your local machine (not the OverTheWire machine!), clone the repository and find the password for the next level. This needs git installed locally on your machine.
+
+* Writeup
+    
+    Di level ini, kita harus melakukan *push* sebuah file baru ke repositori Git jarak jauh. Tantangannya adalah melewati aturan `.gitignore` dan mengonfigurasi identitas Git di lingkungan shell sementara.
+    
+    ```bash
+    # Buat direktori kerja sementara
+    mkdir /tmp/my_work_31
+    cd /tmp/my_work_31
+    
+    # Clone repositori
+    git clone ssh://bandit31-git@localhost:2220/home/bandit31-git/repo .
+    
+    # Konfigurasi identitas Git (PENTING: agar bisa melakukan commit)
+    git config user.email "bandit31@overthewire.org"
+    git config user.name "bandit31"
+    
+    # Buat file sesuai instruksi README.md (Misal diminta file 'key.txt')
+    echo "May I come in?" > key.txt
+    
+    # Tambahkan file secara paksa karena .gitignore biasanya memblokir file .txt
+    git add -f key.txt
+    
+    # Lakukan commit
+    git commit -m "Submit key file"
+    
+    # Push ke server untuk mendapatkan password
+    git push origin master
+    ```
+    
+    - **`git config user.email/name`**: Menetapkan identitas lokal untuk sesi ini. Tanpa ini, Git akan menolak melakukan `commit` karena tidak tahu siapa penulis perubahannya.
+    - **`git clone ... .`**: Titik di akhir perintah memastikan hasil *clone* langsung diletakkan di folder saat ini tanpa membuat sub-folder baru.
+    - **`git add -f`**: Flag `f` (force) sangat krusial di sini. Repositori ini memiliki file `.gitignore` yang memblokir semua file `.txt`. Tanpa `f`, file `key.txt` tidak akan pernah masuk ke area persiapan (staging).
+    - **`git push`**: Mengirim perubahan. Pesan error `pre-receive hook declined` di akhir adalah hal normal karena server hanya ingin memvalidasi file Anda, bukan menyimpannya secara permanen.
