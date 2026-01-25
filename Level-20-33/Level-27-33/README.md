@@ -1,3 +1,15 @@
+# 📁 Level 27 → 33: Git Forensics & Remote Operations
+
+Fase ini berfokus pada teknik investigasi pada sistem kontrol versi (Git), memulihkan data dari histori yang disembunyikan, manipulasi metadata, dan interaksi aktif dengan remote repository.
+
+| Level | Materi Utama | Perintah Penting |
+| :--- | :--- | :--- |
+| **27-30** | Git History & Branches | `git clone`, `git log`, `git branch -a` |
+| **30-32** | Git Tags & Remote Push | `git tag`, `git show`, `git push` |
+| **32-33** | Posix Shell Escape | `$0`, `sh`, `Variable expansion` |
+
+---
+
 ### Level 27 → Level 28
 
 There is a git repository at `ssh://bandit27-git@bandit.labs.overthewire.org/home/bandit27-git/repo` via the port `2220`. The password for the user `bandit27-git` is the same as for the user `bandit27`.
